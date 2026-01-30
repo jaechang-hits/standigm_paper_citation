@@ -570,28 +570,30 @@ def generate_comparison_charts(papers_dict: dict, comparison_stats: dict, output
     # 1. Total Citations (전체 인용수)
     ax1 = axes[0]
     bars1 = ax1.bar(ordered_companies, total_citations, color=colors, width=0.6)
-    ax1.set_ylabel('인용수', fontsize=12)
-    ax1.set_title('전체 인용수', fontsize=14, fontweight='bold')
+    ax1.set_ylabel('인용수', fontsize=18)
+    ax1.set_title('전체 인용수', fontsize=21, fontweight='bold')
+    ax1.tick_params(axis='both', labelsize=15)
     for bar, val in zip(bars1, total_citations):
         ax1.text(bar.get_x() + bar.get_width()/2, bar.get_height() + max(total_citations)*0.02,
-                 f'{int(val)}', ha='center', va='bottom', fontsize=12, fontweight='bold')
+                 f'{int(val)}', ha='center', va='bottom', fontsize=18, fontweight='bold')
     ax1.set_ylim(0, max(total_citations) * 1.15)
 
     # 2. Average Citations per Paper (논문당 평균 인용수)
     ax2 = axes[1]
     bars2 = ax2.bar(ordered_companies, avg_citations, color=colors, width=0.6)
-    ax2.set_ylabel('인용수', fontsize=12)
-    ax2.set_title('논문당 평균 인용수', fontsize=14, fontweight='bold')
+    ax2.set_ylabel('인용수', fontsize=18)
+    ax2.set_title('논문당 평균 인용수', fontsize=21, fontweight='bold')
+    ax2.tick_params(axis='both', labelsize=15)
     for bar, val in zip(bars2, avg_citations):
         ax2.text(bar.get_x() + bar.get_width()/2, bar.get_height() + max(avg_citations)*0.02,
-                 f'{val:.1f}', ha='center', va='bottom', fontsize=12, fontweight='bold')
+                 f'{val:.1f}', ha='center', va='bottom', fontsize=18, fontweight='bold')
     ax2.set_ylim(0, max(avg_citations) * 1.15)
 
     # Add legend (HITS first)
     fig.legend([bars1[i] for i in range(len(ordered_companies))], ordered_companies,
-               loc='upper center', bbox_to_anchor=(0.5, 0.02), ncol=len(ordered_companies), fontsize=11)
+               loc='upper center', bbox_to_anchor=(0.5, 0.02), ncol=len(ordered_companies), fontsize=16)
 
-    plt.suptitle('HITS vs Standigm 논문 인용수 비교', fontsize=16, fontweight='bold', y=1.02)
+    plt.suptitle('HITS vs Standigm 논문 인용수 비교', fontsize=24, fontweight='bold', y=1.02)
     plt.tight_layout()
 
     chart_filename = f"{output_prefix}company_comparison.png"
